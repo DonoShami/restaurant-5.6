@@ -3,10 +3,11 @@
 namespace restaurant\Http\Controllers;
 
 use Illuminate\Http\Request;
-use restaurant\models\mesa;
+use restaurant\models\carta_item;
+use restaurant\models\carta;
 use restaurant\models\producto;
 
-class OrdenController extends Controller
+class CartaItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        return view('sistema.orden.index',['title' => 'ORDENES','action' => '/orden']);
+        //
     }
 
     /**
@@ -25,11 +26,7 @@ class OrdenController extends Controller
      */
     public function create()
     {
-        //$headers = zona::getPull();
-        $mesas = mesa::all();
-        $productos = producto::all();
-        return view('sistema.orden.crear', ['title' => 'NUEVA ORDEN','action' => '/orden', 'mesas' => $mesas, 'productos' => $productos]);
-        //return view('sistema.orden.crear',['title' => 'NUEVA ORDEN','action' => '/orden']);
+        //
     }
 
     /**
@@ -40,7 +37,10 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$productos = producto::all();
+        carta_item::create($request->all());
+        //return $request->input('carta_id') ." - ".$request->input('producto_id') ." - " .$request->input('stock');
+        return "oks";
     }
 
     /**

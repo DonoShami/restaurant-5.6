@@ -3,10 +3,10 @@
 namespace restaurant\Http\Controllers;
 
 use Illuminate\Http\Request;
-use restaurant\models\mesa;
+use restaurant\models\carta;
 use restaurant\models\producto;
-
-class OrdenController extends Controller
+use restaurant\models\carta_item;
+class CartaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,12 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        return view('sistema.orden.index',['title' => 'ORDENES','action' => '/orden']);
+        $data = carta::all();
+        $data2 = carta_item::with('productos')->get();
+        $data2 = carta_item::with('productos')->get();
+        $headers = carta::getHeaders();
+        $productos = producto::all();
+        return view('sistema.carta.index',['data' => $data,'data2' => $data2,'title' => 'CARTA','action' => '/carta','headers' => $headers, 'productos' => $productos]);
     }
 
     /**
@@ -25,11 +30,8 @@ class OrdenController extends Controller
      */
     public function create()
     {
-        //$headers = zona::getPull();
-        $mesas = mesa::all();
-        $productos = producto::all();
-        return view('sistema.orden.crear', ['title' => 'NUEVA ORDEN','action' => '/orden', 'mesas' => $mesas, 'productos' => $productos]);
-        //return view('sistema.orden.crear',['title' => 'NUEVA ORDEN','action' => '/orden']);
+        $headers = carta::getPull();//campos
+        return view('sistema.carta.crear',['title' => 'NUEVA CARTA','action' => '/carta','headers' => $headers]);
     }
 
     /**
@@ -40,7 +42,8 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        carta::create($request->all());
+        return redirect('/sistema/carta')/*->with('mensaje', 'Creado con exito')*/;
     }
 
     /**
@@ -62,7 +65,9 @@ class OrdenController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mesa = mesa::find($id);
+        $headers = mesa::getPull();
+        return view('sistema.mesa.editar',['title' => 'MESA - EDITAR','action' => '/carta'.$id,'data' => $mesa,'headers' => $headers]);
     }
 
     /**

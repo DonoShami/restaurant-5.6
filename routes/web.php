@@ -42,6 +42,7 @@ Route::group(['prefix' => 'sistema','as' => 'sistema::','middleware' => 'auth'],
     Route::resource('/mesa','MesaController');    
     // PRODUCTO ENVIRONMENT
     Route::resource('/producto', 'ProductoController');
+    
 });
 
 Route::group(['prefix' => 'sistema', 'middleware' => ['auth','usuario-mozo']],function(){
@@ -51,4 +52,9 @@ Route::group(['prefix' => 'sistema', 'middleware' => ['auth','usuario-mozo']],fu
     //Route::get('ordenes/agregar', 'OrdenController@create')->name('agregar_venta');
     Route::resource('/orden','OrdenController');
 
+});
+Route::group(['prefix' => 'sistema', 'middleware' => ['auth','usuario-administrador']],function(){
+
+    Route::resource('/carta','CartaController');
+    Route::resource('/carta-item','CartaItemController');
 });

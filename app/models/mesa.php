@@ -16,4 +16,9 @@ class mesa extends Model
     public static function getPull(){
         return ['numero','capacidad'];
     }
+    public static function getMesa()
+    {
+        return ['numero','capacidad'];
+    }
+
 }

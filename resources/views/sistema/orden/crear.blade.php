@@ -22,15 +22,9 @@
                             <label for="">Mesa :</label>
                             <select name="mesas" id="mesas" class="form-control" required>
                                 <option value="">Seleccione la Mesa</option>
-                                <option value="0">Mesa #01</option>
-                                <option value="0">Mesa #02</option>
-                                <option value="0">Mesa #03</option>
-                                <option value="0">Mesa #04</option>
-                                <option value="0">Mesa #05</option>
-                                <option value="0">Mesa #06</option>
-                                <option value="0">Mesa #07</option>
-                                <option value="0">Mesa #08</option>
-                                <option value="0">Mesa #09</option>
+                                @foreach ($mesas as $key => $mesa)
+                                    <option value="0">Mesa #{{$mesa->numero}}</option>
+                                @endforeach
                             </select>
                             <input type="hidden" id="idmesa" name="idmesa">
                             <input type="hidden" id="capacidad" name="capacidad">

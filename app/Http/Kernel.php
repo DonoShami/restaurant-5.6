@@ -57,5 +57,6 @@ class Kernel extends HttpKernel
         'guest' => \restaurant\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'usuario-mozo' => \restaurant\Http\Middleware\PermisoMozo::class,
+        'usuario-administrador' => \restaurant\Http\Middleware\PermisoAdministrador::class,
     ];
 }

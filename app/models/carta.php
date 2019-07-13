@@ -10,10 +10,14 @@ class carta extends Model
     protected $fillable = ['version'];
     protected $guarded = ['id','fecha'];
     public $timestamps = false;
-    public function getHeaders(){
+    public static function getHeaders(){
         return ['id','version','fecha'];
     }
     public static function getPull(){
-    	return ['id','version'];
+    	return ['version'];
+    }
+    public function productosCarta()
+    {
+        return $this->belongsToMany(producto::class, 'carta_item');
     }
 }

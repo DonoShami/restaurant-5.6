@@ -16,4 +16,8 @@ class producto extends Model
     public static function getPull(){
         return ['id','nombre','descripcion','imagen','precio','codigo','eliminado','costo','tiempo_espera','video'];
     }
+    public function carta_items()
+    {
+        return $this->belongsTo(carta_item::class);//parecido al join- muchos a muchos
+    }
 }
