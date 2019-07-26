@@ -34,7 +34,7 @@
                         <div class="col-xs-4 col-md-6">
                             <label for="">Cliente:</label>
                             <div class="input-group">
-                                <input type="hidden" name="idcliente" id="idcliente">
+                                <input type="hidden" name="idcliente" id="">
                                 <input type="text" class="form-control"   id="cliente" onkeypress="" required>
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span> Buscar</button>
@@ -43,7 +43,7 @@
                         </div> 
                         <div class="col-xs-4 col-md-3">
                             <label for="">Fecha:</label>
-                            <input type="date" class="form-control" name="fecha" value="2019-07-04"  required>
+                            <input type="date" class="form-control" name="fecha" id="fecha"  required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,6 +115,23 @@
 
 @section("scripts")
 <script>
+    $(function() {
+        var hoy = new Date();
+        //Año
+        y = hoy.getFullYear();
+        //Mes
+        m = hoy.getMonth() + 1;
+        //Día
+        d = hoy.getDate();
+            if(d<10)
+                d='0'+d; //agrega cero si el menor de 10
+            if(m<10)
+                m='0'+m //agrega cero si el menor de 10
+        //document.getElementById('fecha').value=y+"-"+m+"-"+d;
+         $("#fecha").val(y+"-"+m+"-"+d);
+         console.log("fecha"+d+"/"+m+"/"+y);
+
+    })
     $(".btn-agregar2").on("click",function(){
         data = $(this).val();
             infoproducto = data.split("*");
@@ -152,10 +169,10 @@
             subtotal = subtotal + Number($(this).find("td:eq(5)").text());
         });
         $("input[name=subtotal]").val(subtotal.toFixed(2));
-        porcentaje = $("#igv").val();
+        porcentaje = /*$("#igv").val();*/18;
         igv = subtotal * (porcentaje/100);
         $("input[name=igv]").val(igv.toFixed(2));
-        descuento = $("input[name=descuento]").val();
+        descuento = /*$("input[name=descuento]").val();*/0;
         total = subtotal + igv - descuento;
         $("input[name=total]").val(total.toFixed(2));
 

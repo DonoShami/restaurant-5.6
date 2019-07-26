@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-9">
-                            <input type="text" style="text-transform:uppercase;" class="form-control" id="producto">
+                            <input type="text" style="text-transform:uppercase;" class="form-control" id="buscarprod">
                         </div>
                         <div class="col-md-3">
                             
@@ -25,19 +25,19 @@
                                         <th>Codigo</th>
                                         <th>Nombre</th>
                                         <th>Precio</th>
-                                        <th>Stock</th>
+                                        
                                         <th>Categoria</th>
                                         <th>Agregar</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($productos as $key => $producto)
+                                <tbody id="busqueda_producto">
+                                    @foreach ($productos as $producto)
                                     <tr>
                                         <td>{{$producto->id}}</td>
                                         <td>{{$producto->codigo}}</td>
                                         <td>{{$producto->nombre}}</td>
-                                        <td>{{$producto->precio}}</td>
-                                        <td>Stock 0</td>
+                                        <td>{{number_format($producto->precio, 2)}} </td>
+                                        
                                         <td>categoria</td>
                                         <td>
                                             <div class="btn-group">

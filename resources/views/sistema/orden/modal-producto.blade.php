@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Lita de Productos</h4>
+                <h4 class="modal-title">Carta</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -25,23 +25,25 @@
                                     <th>Codigo</th>
                                     <th>Nombre</th>
                                     <th>Precio</th>
-                                    <th>Stock</th>
+                                   
                                     <th>Categoria</th>
                                     <th>Agregar</th>
                                 </tr>
                             </thead>
+                             
+                       
                             <tbody>
                                 @foreach ($productos as $key => $producto)
                                 <tr>
                                     <td>{{$producto->id}}</td>
-                                    <td>{{$producto->codigo}}</td>
-                                    <td>{{$producto->nombre}}</td>
-                                    <td>{{$producto->precio}}</td>
-                                    <td>Stock 0</td>
+                                    <td>{{$producto->productos[0]['codigo']}}</td>
+                                    <td>{{$producto->productos[0]['nombre']}}</td>
+                                    <td>{{number_format($producto->productos[0]['precio'], 2)}}</td>
+                                    
                                     <td>categoria</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-success btn-agregar2" value="{{$producto->id}}*{{$producto->codigo}}*{{$producto->nombre}}*{{$producto->precio}}*stock0*categoria0">
+                                            <button type="button" class="btn btn-success btn-agregar2" value="{{$producto->id}}*{{$producto->productos[0]['codigo']}}*{{$producto->productos[0]['nombre']}}*{{number_format($producto->productos[0]['precio'], 2)}}*stock0*categoria0">
                                                 <span class="fa fa-plus"></span>
                                             </button>
                                         </div>

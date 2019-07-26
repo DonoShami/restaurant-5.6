@@ -5,6 +5,8 @@ namespace restaurant\Http\Controllers;
 use Illuminate\Http\Request;
 use restaurant\models\mesa;
 use restaurant\models\producto;
+use restaurant\models\carta;
+use restaurant\models\carta_item;
 
 class OrdenController extends Controller
 {
@@ -27,7 +29,9 @@ class OrdenController extends Controller
     {
         //$headers = zona::getPull();
         $mesas = mesa::all();
-        $productos = producto::all();
+        //$productos = producto::all();
+        $cartaActiva = carta::where('estado', 1)->first();
+        $productos = carta_item::with('productos')->where('carta_id', $cartaActiva->id)->get();
         return view('sistema.orden.crear', ['title' => 'NUEVA ORDEN','action' => '/orden', 'mesas' => $mesas, 'productos' => $productos]);
         //return view('sistema.orden.crear',['title' => 'NUEVA ORDEN','action' => '/orden']);
     }

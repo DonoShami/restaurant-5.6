@@ -55,6 +55,10 @@ Route::group(['prefix' => 'sistema', 'middleware' => ['auth','usuario-mozo']],fu
 });
 Route::group(['prefix' => 'sistema', 'middleware' => ['auth','usuario-administrador']],function(){
 
+    Route::resource('/orden','OrdenController');
     Route::resource('/carta','CartaController');
     Route::resource('/carta-item','CartaItemController');
+    Route::post('/carta-item/buscar','CartaController@buscarProducto');
+    Route::post('/carta/buscar','CartaController@buscarProducto');
+    Route::delete('/carta-item/delete/{id}','CartaItemController@destroy');
 });

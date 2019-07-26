@@ -16,7 +16,8 @@ class CartaItemController extends Controller
      */
     public function index()
     {
-        //
+        $cartaActiva = carta::where('estado', 1)->first();
+        return carta_item::with('productos')->where('carta_id', $cartaActiva->id)->get();
     }
 
     /**
@@ -40,7 +41,7 @@ class CartaItemController extends Controller
         //$productos = producto::all();
         carta_item::create($request->all());
         //return $request->input('carta_id') ." - ".$request->input('producto_id') ." - " .$request->input('stock');
-        return "oks";
+        return "save";
     }
 
     /**
@@ -53,7 +54,7 @@ class CartaItemController extends Controller
     {
         //
     }
-
+   
     /**
      * Show the form for editing the specified resource.
      *
@@ -85,6 +86,17 @@ class CartaItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+         	
+        //carta_item::destroy($id);	
+        $item = carta_item::find($id);
+        if($item != null){
+            $item->delete();
+            return "Eliminado ->".$item;
+        }
+        else {
+            return "Ocurrio un problema-> ".$item;   
+        }
+        
+        
     }
 }

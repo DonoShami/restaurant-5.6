@@ -2,7 +2,8 @@
         <li class="header">Restaurant</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="{{url('/sistema')}}"><i class="fas fa-link"></i> <span>Inicio</span></a></li>
-        <li><a href="{{ url('/sistema/crearpedido') }}"><i class="fas fa-link"></i> <span>Crear Pedido</span></a></li>
+        <li><a href="{{ url('/sistema/orden') }}"><i class="fas fa-link"></i> <span>Crear Pedido</span></a></li>
+        <li><a href="{{ url('/sistema/carta') }}"><i class="fas fa-link"></i> <span>Carta</span></a></li>
         <li class="header">
           Configuraciones Admin
           

@@ -16,8 +16,8 @@ class CartaController extends Controller
     public function index()
     {
         $data = carta::all();
-        $data2 = carta_item::with('productos')->get();
-        $data2 = carta_item::with('productos')->get();
+        $cartaActiva = carta::where('estado', 1)->first();
+        $data2 = carta_item::with('productos')->where('carta_id', $cartaActiva->id)->get();
         $headers = carta::getHeaders();
         $productos = producto::all();
         return view('sistema.carta.index',['data' => $data,'data2' => $data2,'title' => 'CARTA','action' => '/carta','headers' => $headers, 'productos' => $productos]);
@@ -65,9 +65,13 @@ class CartaController extends Controller
      */
     public function edit($id)
     {
-        $mesa = mesa::find($id);
-        $headers = mesa::getPull();
-        return view('sistema.mesa.editar',['title' => 'MESA - EDITAR','action' => '/carta'.$id,'data' => $mesa,'headers' => $headers]);
+        //$mesa = mesa::find($id);
+        //$headers = mesa::getPull();
+        //return view('sistema.mesa.editar',['title' => 'MESA - EDITAR','action' => '/carta'.$id,'data' => $mesa,'headers' => $headers]);
+        carta::where('estado', 1)->update(['estado' => 0]);
+        carta::where('id', $id)->update(['estado' => 1]);
+
+        return redirect('/sistema/carta');
     }
 
     /**
@@ -91,5 +95,10 @@ class CartaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function buscarProducto(Request $request)
+    {
+        return producto::where('nombre', 'like', '%' . $request->valor . '%')->orWhere('codigo', 'like', '%' . $request->valor . '%')->get();
+        //return $request->valor;
     }
 }

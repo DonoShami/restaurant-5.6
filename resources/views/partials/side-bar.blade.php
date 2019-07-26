@@ -30,7 +30,7 @@
       @if (session()->get('rol_nombre') == 'mozo')
             @include('partials.menu-usuario.mozo')
       @endif
-      @if (session()->get('rol_nombre') == 'admin')
+      @if (session()->get('rol_nombre') == 'administrador')
             @include('partials.menu-usuario.administrador')
       @endif
       <!-- /.sidebar-menu -->
